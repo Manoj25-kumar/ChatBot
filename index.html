@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body class="font-[Poppins] m-0">
+    <div id="bgContainer" class="pl-2 pr-2 h-screen">
+        <h1 class="text-center text-3xl font-semibold text-white m-4 p-4 font-poppins">MEET OUR CHATBOT 🤖</h1>
+       <img 
+  src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" 
+  class="w-36 "
+/>
+        <div id="chatContainer" class="chat-container pt-2 pb-2"></div>
+        
+        <div class="flex justify-center fixed bottom-0 w-full pl-2 pr-2">
+           <input id="userInput" class="bg-white text-gray-800 h-12 rounded-full px-4 w-full shadow-md outline-none mb-3" />
+            
+            <button class="bg-gray-900 hover:bg-gray-800 text-white rounded-full px-6 h-12 shadow-md transition" onclick="sendMsgToChatbot()">
+     <i class="fa-solid fa-paper-plane"></i>
+</button>
+        </div>
+    </div>
+
+<script>
+    let chatbotMsgList = [
+     "Hi 👋",
+     "Hey!",
+     "Good Morning ☀️",
+     "Good Evening 🌙",
+     "How can I help you?",
+     "My name is JUDO",
+     "Nice to meet you!",
+     "Tell me more 😄"
+ ];
+
+ let chatContainer = document.getElementById("chatContainer");
+ let userInput = document.getElementById("userInput");
+ let bgContainer=document.getElementById("bgContainer");
+ 
+bgContainer.style.backgroundSize = "cover";
+bgContainer.style.backgroundImage =
+"linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5)";
+chatContainer.classList.add("px-2","pb-20");
+
+userInput.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        sendMsgToChatbot();
+    }
+});
+
+
+function sendMsgToChatbot(){
+    let userMsg=userInput.value;
+   
+    let msgContainer=document.createElement("div");
+    msgContainer.classList.add("text-right","mt-2","mb-2");
+    chatContainer.appendChild(msgContainer);
+    
+    let actualMsg=document.createElement("span");
+    actualMsg.textContent=userMsg;
+    actualMsg.classList.add("inline-block","font-roboto","font-medium","rounded-xl","p-3");
+    actualMsg.classList.add("bg-blue-500","text-white")
+    msgContainer.appendChild(actualMsg);
+    userInput.value="";
+    getReplyFromChatbot();
+}
+
+function getReplyFromChatbot(){
+    let noOfChatbotMsgs=chatbotMsgList.length;
+    let botMsg=chatbotMsgList[Math.floor(Math.random()*noOfChatbotMsgs)];
+    
+    
+    let chatbotMsgContainer=document.createElement("div");
+    chatbotMsgContainer.classList.add('mb-2','mt-2');
+    chatContainer.appendChild(chatbotMsgContainer);
+    
+    let chatBotMsg=document.createElement("span");
+    chatBotMsg.textContent=botMsg;
+    chatBotMsg.classList.add("font-roboto","font-medium","rounded-xl","p-3","inline-block");
+    chatBotMsg.classList.add("bg-gray-200","text-black")
+    chatbotMsgContainer.appendChild(chatBotMsg);
+}
+
+</script>
+</body>
+
+</html>
